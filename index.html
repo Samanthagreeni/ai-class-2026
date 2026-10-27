@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AI 클래스 파일럿 참여 교사 모집 안내">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>AI 클래스 파일럿 교사 모집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: sticky top bar with three tabs. Each tab is one reading column that opens into two columns on desktop. */
+:root{
+  --bg:#F7FBFE; --surface:#FFFFFF; --surface-2:#EEF7FD; --ink:#142540; --ink-2:#4A5F7A; --line:#DCEAF5;
+  --navy:#1B3A6B; --on-navy:#FFFFFF; --on-navy-2:#C5D7EE;
+  --sky:#4DB1E8; --sky-text:#16689E; --sky-soft:#DDF0FC;
+  --btn:#1B3A6B; --on-btn:#FFFFFF;
+  --ok:#17714A; --ok-soft:#DDF3E8; --warn:#8A5700; --warn-soft:#FFF0D2; --idle:#4A5F7A; --idle-soft:#E6EDF4;
+  --focus:#1F8FD0;
+  --display:'IBM Plex Sans KR','Noto Sans KR',system-ui,sans-serif;
+  --body:'Noto Sans KR',system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --sun:#FFD54A; --sun-soft:#FFF5CF; --sun-ink:#4D3900; --sun-text:#8A5A00;
+  --r:10px;
+}
+
+
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.7 var(--body);word-break:keep-all;overflow-wrap:break-word;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
+h1,h2,h3{font-family:var(--display);color:var(--ink);margin:0;text-wrap:balance;line-height:1.35}
+p{margin:0}
+a{color:var(--sky-text)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1080px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:10px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-width:0}
+.brand-mark{flex:none;width:38px;height:38px;border-radius:10px;background:var(--navy);display:grid;place-items:center}
+.brand b{display:block;font:700 1.0625rem/1.25 var(--display)}
+.brand small{display:block;font-size:.8125rem;color:var(--ink-2);line-height:1.3}
+.tabs{display:flex;gap:4px}
+.tab{border:0;background:transparent;padding:10px 18px;border-radius:8px;font-weight:500;color:var(--ink-2);cursor:pointer;min-height:44px}
+.tab:hover{background:var(--surface-2)}
+.tab[aria-selected="true"]{background:var(--sky-soft);color:var(--sky-text);font-weight:700}
+@media (max-width:640px){.tabs{width:100%}.tab{flex:1;padding-inline:8px}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 22px;border-radius:10px;border:1.5px solid transparent;font-weight:700;cursor:pointer;text-decoration:none;font-size:1rem;line-height:1.3}
+.btn-primary{background:var(--btn);color:var(--on-btn)}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn-line{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-line:hover{background:var(--surface-2)}
+.btn-sky{background:var(--sky);color:#0B1B30}
+.btn-sky:hover{filter:brightness(1.08)}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.45);color:var(--on-navy)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-sm{min-height:40px;padding:6px 14px;font-size:.9375rem}
+
+/* hero */
+.hero{background:linear-gradient(180deg,var(--sky-soft) 0%,var(--bg) 100%);color:var(--ink);overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;align-items:center;padding-block:72px 64px}
+.hero-logo{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.hero-logo .brand-mark{width:56px;height:56px;border-radius:16px}
+.hero-logo b{font:700 1.25rem/1.2 var(--display);color:var(--navy)}
+
+
+.eyebrow{display:inline-block;font-size:.9375rem;font-weight:700;color:var(--sky-text);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 14px;margin-bottom:16px}
+.hero h1{color:var(--ink);font-size:clamp(2rem,5vw,3rem);font-weight:700;line-height:1.3;margin-bottom:16px}
+.lead{color:var(--ink-2);font-size:1.125rem;max-width:30em}
+.hero-art{display:grid;place-items:center;min-width:0}
+.art{width:100%;max-width:460px;height:auto}
+.art .b1{fill:var(--surface);opacity:.8}
+.art .b2{fill:var(--sky);opacity:.3}
+.art .dev{fill:var(--surface);stroke:var(--line);stroke-width:2}
+.art .scr{fill:var(--surface-2)}
+.art .bs{fill:var(--sky)}
+.art .wl{fill:var(--surface)}
+.art .ba{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.art .ln{fill:var(--line)}
+.art .inp{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.art .dot{fill:var(--sky)}
+.art .dot2{fill:var(--line)}
+.art .qr{fill:var(--ink)}
+.art .qrw{fill:var(--surface)}
+.art .spark{fill:var(--sky)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.join{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:12px;min-width:0}
+.join-head{display:flex;justify-content:space-between;align-items:center;font-size:.8125rem;color:var(--ink-2);font-weight:700}
+.join-field{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--bg)}
+.join-field span{font-size:.8125rem;color:var(--ink-2)}
+.bubble{padding:10px 14px;border-radius:14px;font-size:.9375rem;line-height:1.55;max-width:92%}
+.bubble.s{background:var(--sky-soft);color:var(--ink);justify-self:end;border-bottom-right-radius:4px}
+.bubble.a{background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:4px}
+.join-note{font-size:.8125rem;color:var(--ink-2)}
+@media (max-width:820px){.hero-in{grid-template-columns:1fr;padding-block:40px 32px;gap:12px}.hero-art{order:-1}.art{max-width:300px}.hero-logo{margin-bottom:18px}}
+
+/* sections */
+.section{padding-block:48px}
+.section + .section{padding-top:0}
+.sec-head{margin-bottom:24px;display:grid;gap:6px}
+.sec-head h2{font-size:1.5rem;font-weight:700}
+.sec-head p{color:var(--ink-2);max-width:40em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;min-width:0}
+.card h3{font-size:1.125rem;font-weight:600;margin-bottom:6px}
+.card .muted{color:var(--ink-2);font-size:.9375rem}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 32px;margin:0}
+.facts div{border-top:1px solid var(--line);padding:16px 0}
+.facts dt{font-size:.875rem;color:var(--ink-2);margin-bottom:2px}
+.facts dd{margin:0;font-weight:700;font-size:1.0625rem}
+.facts dd small{display:block;font-weight:400;font-size:.8125rem;color:var(--ink-2);margin-top:2px}
+
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:820px){.grid-2{grid-template-columns:minmax(0,1fr)}}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px 1fr auto;gap:4px 16px;align-items:start;padding:18px 0;border-top:1px solid var(--line);counter-increment:s}
+.steps li::before{content:counter(s);grid-row:span 2;width:36px;height:36px;border-radius:50%;background:var(--sky-soft);color:var(--sky-text);font:700 1rem/36px var(--display);text-align:center}
+.steps b{font-weight:700}
+.steps .when{font-size:.875rem;color:var(--ink-2);white-space:nowrap}
+.steps p{grid-column:2/4;color:var(--ink-2);font-size:.9375rem}
+@media (max-width:560px){.steps li{grid-template-columns:44px 1fr}.steps .when{grid-column:2;white-space:normal}.steps p{grid-column:2}}
+
+.notice{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:12px}
+.notice h3{font-size:1.125rem;font-weight:600}
+.notice ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.notice li::marker{color:var(--sky-text)}
+
+/* forms */
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+.field{display:grid;gap:6px;align-content:start;min-width:0}
+.field.full{grid-column:1/-1}
+.field>label,.field>legend{font-weight:700;font-size:.9375rem;padding:0}
+.field .hint{font-size:.8125rem;color:var(--ink-2);font-weight:400}
+.req{color:var(--sky-text);margin-left:4px}
+input[type=text],input[type=email],input[type=date],select,textarea{width:100%;min-height:46px;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
+input::placeholder,textarea::placeholder{color:var(--ink-2);opacity:.75}
+input:focus,select:focus,textarea:focus{border-color:var(--focus)}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:inline-flex;align-items:center;min-height:46px;padding:8px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-weight:500}
+.seg input:checked+span{border-color:var(--sky-text);background:var(--sky-soft);color:var(--sky-text);font-weight:700}
+.seg input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.msg{border-radius:10px;padding:14px 16px;background:var(--ok-soft);color:var(--ok);font-weight:500;font-size:.9375rem}
+@media (max-width:640px){.form{grid-template-columns:minmax(0,1fr)}}
+
+/* tags, pills */
+.tag-ex{display:inline-block;font-size:.75rem;font-weight:700;background:var(--warn-soft);color:var(--warn);padding:1px 8px;border-radius:6px;vertical-align:middle;line-height:1.7}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;font-size:.8125rem;font-weight:700;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.p-idle{background:var(--idle-soft);color:var(--idle)}
+.p-warn{background:var(--warn-soft);color:var(--warn)}
+.p-info{background:var(--sky-soft);color:var(--sky-text)}
+.p-ok{background:var(--ok-soft);color:var(--ok)}
+
+/* teacher space */
+.page-head{padding-block:40px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px}
+.page-head h1{font-size:1.75rem;font-weight:700}
+.page-head p{color:var(--ink-2);margin-top:4px}
+.progress{height:10px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--line)}
+.progress i{display:block;height:100%;background:var(--sky);border-radius:999px;transition:width .25s ease}
+.prog-row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin:12px 0 8px;font-size:.9375rem}
+.prog-row b{font-size:1.125rem}
+.checks{list-style:none;margin:12px 0 0;padding:0;display:grid}
+.checks li{border-top:1px solid var(--line)}
+.checks label{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:14px 0;cursor:pointer;align-items:start}
+.checks input{width:22px;height:22px;margin:3px 0 0;accent-color:var(--navy)}
+
+
+.checks b{display:block;font-weight:700}
+.checks small{display:block;color:var(--ink-2);font-size:.875rem;line-height:1.55}
+.checks input:checked+span b{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--line)}
+
+.stepper{display:flex;gap:6px;margin:14px 0 18px}
+.stepper i{flex:1;height:6px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.stepper i.on{background:var(--sky);border-color:var(--sky)}
+.consent-body{display:grid;gap:14px;min-height:230px;align-content:start}
+.consent-body h4{margin:0;font:600 1rem var(--display)}
+.opt{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;align-items:start}
+.opt input{width:22px;height:22px;margin-top:2px;accent-color:var(--navy)}
+
+
+.opt b{display:block;font-weight:700;font-size:.9375rem}
+.opt small{color:var(--ink-2);font-size:.8125rem;line-height:1.5;display:block}
+.opt:has(input:checked){border-color:var(--sky-text);background:var(--sky-soft)}
+.consent-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.fine{font-size:.8125rem;color:var(--ink-2)}
+.done{display:grid;gap:10px;justify-items:start}
+
+.log-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.log-item{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--surface);display:grid;gap:6px}
+.log-meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:.875rem;color:var(--ink-2)}
+.log-meta b{color:var(--ink);font-size:1rem}
+.log-item p{font-size:.9375rem}
+.log-item .k{color:var(--ink-2);font-weight:700;margin-right:6px}
+
+/* status */
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.875rem;color:var(--ink-2);margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.dist{display:flex;height:14px;border-radius:999px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line);gap:2px}
+.dist i{display:block;min-width:6px}
+.c-idle{background:var(--idle)}.c-warn{background:#D9962B}.c-info{background:var(--sky)}.c-ok{background:#2FA878}
+.summary{display:flex;flex-wrap:wrap;gap:8px 36px;margin-top:20px}
+.summary div{min-width:84px}
+.summary b{display:block;font:700 1.75rem/1.2 var(--display);font-variant-numeric:tabular-nums}
+.summary span{font-size:.875rem;color:var(--ink-2)}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+.toolbar .search{flex:1 1 240px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;min-height:40px;cursor:pointer;font-weight:500;font-size:.9375rem}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--on-navy);font-weight:700}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:.9375rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8125rem;color:var(--ink-2);font-weight:700;background:var(--surface-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td small{display:block;color:var(--ink-2);font-size:.8125rem}
+.empty{padding:32px 16px;text-align:center;color:var(--ink-2)}
+.todo{list-style:none;margin:0;padding:0;display:grid}
+.todo li{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.todo li:first-child{border-top:0;padding-top:0}
+.todo b{display:block;font-weight:700}
+.todo small{color:var(--ink-2);font-size:.875rem;line-height:1.5;display:block}
+
+footer{border-top:1px solid var(--line);margin-top:24px;padding-block:28px;color:var(--ink-2);font-size:.875rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== B안: 가운데 정렬 첫 화면, 노랑 하이라이트와 둥근 카드 ===== */
+:root{--r:18px}
+.btn{border-radius:999px}
+.btn-sun{background:var(--sun);color:var(--sun-ink)}
+.btn-sun:hover{filter:brightness(1.04)}
+.tab{border-radius:999px}
+.tab[aria-selected="true"]{background:var(--btn);color:var(--on-btn)}
+.chip[aria-pressed="true"]{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}
+.hero{background:linear-gradient(180deg,var(--sun-soft) 0%,var(--bg) 100%)}
+.hero-in{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;padding-block:56px 48px;gap:24px}
+.hero-copy{display:grid;justify-items:center}
+.hero-logo{justify-content:center}
+.lead{margin-inline:auto}
+.cta{justify-content:center}
+.hero-art{order:0}
+.art{max-width:520px}
+.art .b1{fill:var(--sun);opacity:.5}
+.art .b2{fill:var(--sky);opacity:.35}
+.eyebrow{background:var(--navy);border-color:var(--navy);color:var(--sun)}
+.hl{background:var(--sun);color:var(--sun-ink);border-radius:10px;padding:0 .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.facts{gap:12px}
+.facts div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px}
+.grid-4 .card h3::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sun);margin-right:8px}
+.steps li::before{background:var(--sun);color:var(--sun-ink)}
+.notice{background:var(--sun-soft);border-color:transparent}
+.notice li::marker{color:var(--sun-text)}
+.progress i{background:var(--sun)}
+.stepper i.on{background:var(--sun);border-color:var(--sun)}
+.pill{border-radius:999px}
+@media (max-width:820px){.hero-in{padding-block:36px 28px}}
+
+/* ===== B안 베이지 톤: 따뜻한 바탕에 푸른 포인트와 노랑 포인트 ===== */
+:root{--bg:#FAF6EE;--surface:#FFFEFA;--surface-2:#F3ECDF;--line:#E7DDCB;--ink-2:#566176;--sky-soft:#E0EDF6;--sun-soft:#FFF0C4}
+.hero{background:linear-gradient(180deg,var(--surface-2) 0%,var(--bg) 100%)}
+.notice{background:var(--surface);border-color:var(--line)}
+.art .scr{fill:var(--surface-2)}
+
+/* ===== 가독성 강화: 글자 확대, 대비 강화 ===== */
+:root{--ink:#0B1B33;--ink-2:#3F4B63;--line:#E0D3BC;--line-strong:#B9A98A;--navy:#14305F;--sky-text:#0F5A8C;--sky-soft:#DCEBF6}
+
+
+html{font-size:112.5%}
+body{font-size:1rem;line-height:1.75}
+
+h1,h2,h3{letter-spacing:-.01em}
+.hero h1{font-size:clamp(2.25rem,5.6vw,3.25rem)}
+.lead{font-size:1.25rem;color:var(--ink)}
+.eyebrow{font-size:1rem}
+.sec-head h2{font-size:1.75rem}
+.sec-head p{font-size:1.0625rem;color:var(--ink-2)}
+.card h3{font-size:1.25rem}
+.page-head h1{font-size:2rem}
+
+.fine,.hint,.join-note,.checks small,.todo small,.facts dd small,td small,.legend,.summary span,.log-meta,.opt small,.join-head,.join-field span,.brand small,.field .hint,.facts dt{font-size:.9375rem}
+.card .muted,.steps p,.log-item p,.notice li,.todo b,.checks b,.opt b,.steps .when{font-size:1rem}
+.steps b,.facts dd{font-size:1.1875rem}
+.pill{font-size:.875rem}
+.tag-ex{font-size:.8125rem}
+th{font-size:.9375rem;color:var(--ink)}
+table{font-size:1rem}
+.field>label,.field>legend{font-size:1rem}
+.bubble{font-size:1rem}
+footer{font-size:.9375rem}
+
+.tab{font-size:1.0625rem;min-height:48px}
+@media (max-width:640px){.tab{font-size:.9375rem}}
+.btn{font-size:1.0625rem;min-height:54px;padding-inline:26px}
+.btn-sm{min-height:44px}
+.chip{font-size:1rem;min-height:44px}
+input[type=text],input[type=email],input[type=date],select,textarea{font-size:1rem;min-height:52px;border:2px solid var(--line-strong)}
+textarea{min-height:130px}
+.seg span{font-size:1rem;min-height:52px;border:2px solid var(--line-strong)}
+.opt{border:2px solid var(--line-strong)}
+.chip{border:2px solid var(--line-strong)}
+.checks input,.opt input{width:26px;height:26px}
+.checks label{grid-template-columns:32px 1fr}
+
+.card,.notice,.join,.log-item,.tbl-wrap{border-color:var(--line-strong)}
+.card{box-shadow:0 1px 3px rgba(20,37,64,.08)}
+.facts div{border-top-color:var(--line-strong)}
+.steps li{border-top-color:var(--line-strong)}
+.checks li,.todo li{border-top-color:var(--line)}
+.art .dev{stroke:var(--line-strong);stroke-width:2.5}
+.art .ba,.art .inp{stroke:var(--line-strong)}
+.progress,.dist{border-color:var(--line-strong)}
+th{border-bottom:2px solid var(--line-strong)}
+:root{color-scheme:light}
+
+
+.status-pill{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:8px 18px;border-radius:999px;background:var(--ok-soft);color:var(--ok);border:2px solid var(--ok);font-weight:700;font-size:1.0625rem;line-height:1.3;white-space:nowrap;cursor:default;user-select:none}
+.status-pill i{width:10px;height:10px;border-radius:50%;background:var(--ok);animation:pillpulse 1.8s ease-in-out infinite}
+@keyframes pillpulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.status-pill i{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#recruit">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 8.5h7M8.5 11.5h4" stroke="#FFD54A"/></svg>
+      </span>
+      <span><b>AI 클래스 파일럿 허브</b><small>테크빌교육 · 마이클 학생용 클래스</small></span>
+    </a>
+    <span class="status-pill"><i aria-hidden="true"></i>참여 신청 중</span>
+  </div>
+</header>
+
+<main>
+<!-- ============ 모집 안내 ============ -->
+<div class="view" id="view-recruit">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <div class="hero-logo">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 8.5h7M8.5 11.5h4" stroke="#FFD54A"/></svg>
+          </span>
+          <b>AI 클래스 파일럿</b>
+        </div>
+        <p class="eyebrow">교사 모집 · 2026년 11월 수업</p>
+        <h1>AI와 함께 생각하는 교실,<br>우리 반에서 <mark class="hl">진행해요.</mark></h1>
+        <p class="lead">QR코드로 시작하는 우리 반 AI 수업</p>
+        <div class="cta">
+          <a class="btn btn-sun" href="https://script.google.com/macros/s/AKfycbxxz7Eme-iqcPHZ2CdW7TB__Qi4S-qP8vYb5hjDdBrtfOy5Mj_7_llW2TJyIMv_d2Md8g/exec" target="_blank" rel="noopener">참여 신청하기</a>
+          <button class="btn btn-line" data-goto="overview">자세히 보기</button>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="art" viewBox="0 0 460 400" role="img" aria-label="AI와 대화하는 태블릿 화면과 접속용 QR코드 그림">
+          <circle class="b1" cx="230" cy="200" r="172"/>
+          <circle class="b2" cx="368" cy="68" r="34"/>
+          <circle class="b2" cx="66" cy="322" r="22"/>
+          <rect class="dev" x="104" y="84" width="250" height="210" rx="24"/>
+          <rect class="scr" x="118" y="98" width="222" height="182" rx="14"/>
+          <circle class="dot" cx="136" cy="116" r="4"/><circle class="dot2" cx="150" cy="116" r="4"/>
+          <rect class="bs" x="196" y="140" width="124" height="34" rx="14"/>
+          <rect class="wl" x="210" y="154" width="96" height="6" rx="3"/>
+          <rect class="ba" x="134" y="188" width="170" height="58" rx="14"/>
+          <rect class="ln" x="148" y="200" width="140" height="6" rx="3"/>
+          <rect class="ln" x="148" y="214" width="110" height="6" rx="3"/>
+          <rect class="ln" x="148" y="228" width="60" height="6" rx="3"/>
+          <rect class="inp" x="134" y="254" width="190" height="18" rx="9"/>
+          <g transform="translate(310 236)">
+            <rect class="dev" width="104" height="104" rx="16"/>
+            <rect class="qr" x="14" y="14" width="26" height="26" rx="4"/><rect class="qrw" x="19" y="19" width="16" height="16" rx="2"/><rect class="qr" x="23" y="23" width="8" height="8" rx="1"/>
+            <rect class="qr" x="64" y="14" width="26" height="26" rx="4"/><rect class="qrw" x="69" y="19" width="16" height="16" rx="2"/><rect class="qr" x="73" y="23" width="8" height="8" rx="1"/>
+            <rect class="qr" x="14" y="64" width="26" height="26" rx="4"/><rect class="qrw" x="19" y="69" width="16" height="16" rx="2"/><rect class="qr" x="23" y="73" width="8" height="8" rx="1"/>
+            <rect class="qr" x="48" y="16" width="8" height="8" rx="1.5"/><rect class="qr" x="48" y="34" width="8" height="8" rx="1.5"/>
+            <rect class="qr" x="58" y="48" width="8" height="8" rx="1.5"/><rect class="qr" x="76" y="50" width="8" height="8" rx="1.5"/>
+            <rect class="qr" x="50" y="66" width="8" height="8" rx="1.5"/><rect class="qr" x="66" y="64" width="8" height="8" rx="1.5"/>
+            <rect class="qr" x="82" y="70" width="8" height="8" rx="1.5"/><rect class="qr" x="52" y="82" width="8" height="8" rx="1.5"/>
+            <rect class="qr" x="72" y="82" width="8" height="8" rx="1.5"/>
+          </g>
+          <path class="spark" transform="translate(72 118)" d="M0-16 L3.5-3.5 L16 0 L3.5 3.5 L0 16 L-3.5 3.5 L-16 0 L-3.5-3.5Z"/>
+          <path class="spark" transform="translate(402 176) scale(.7)" d="M0-16 L3.5-3.5 L16 0 L3.5 3.5 L0 16 L-3.5 3.5 L-16 0 L-3.5-3.5Z"/>
+          <path class="spark" transform="translate(128 352) scale(.6)" d="M0-16 L3.5-3.5 L16 0 L3.5 3.5 L0 16 L-3.5 3.5 L-16 0 L-3.5-3.5Z"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="overview" style="padding-top:48px">
+    <div class="sec-head">
+      <h2>모집 개요</h2>
+      <p>AI 수업을 처음 해 보는 선생님도, AI 수업을 자주 하시는 선생님도 신청하실 수 있습니다.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>모집 대상</dt><dd>초·중·고 교사 10명</dd></div>
+      <div><dt>1차 모집 기간</dt><dd>10월 31일까지</dd></div>
+      <div><dt>수업 시기</dt><dd>11월 중<small>세부 날짜는 선생님과 협의해 정합니다.</small></dd></div>
+      <div><dt>수업 횟수</dt><dd>1~3회<small>반 구성과 여건에 맞춰 정합니다.</small></dd></div>
+    </dl>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2>참여하시면 이렇게 지원드립니다</h2></div>
+    <div class="grid-4">
+      <div class="card"><h3>수업 공동설계</h3><p class="muted">수업 목표, AI와 하는 활동, 학생 결과물이 이어지도록 함께 설계합니다.</p></div>
+      <div class="card"><h3>마이클 이용 환경</h3><p class="muted">학생용 클래스를 개설하고 QR코드나 링크로 학생을 초대할 수 있습니다.</p></div>
+      <div class="card"><h3>챗봇·운영 지원</h3><p class="muted">AI 튜터를 함께 설정하고, 수업 전 접속과 대화 기능을 점검합니다.</p></div>
+      <div class="card"><h3>전문가 활용비</h3><p class="muted">수업 설계와 실행에 대한 전문가 활용비를 지급<br>1교시 진행 시: 30만원<br>2교시 진행 시: 50만원<br>(수업, 설계, 실행 포함)</p></div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="grid-2" style="align-items:center">
+      <div class="sec-head" style="margin:0">
+        <h2>학생은 이렇게 들어옵니다</h2>
+        <p>QR 링크로 입장해서 닉네임을 입력하면 시작합니다.</p>
+      </div>
+      <div class="join" aria-label="학생 화면 예시">
+        <div class="join-head"><span>학생 화면 예시</span><span>QR 링크로 입장</span></div>
+        <div class="join-field"><span>닉네임 입력</span><strong>별빛탐험대</strong></div>
+        <div class="bubble s">플라스틱을 줄이려면 뭐부터 해야 할까요?</div>
+        <div class="bubble a">우리 반에서 하루 동안 버려지는 플라스틱부터 세어 볼까요? 어떤 것들이 떠오르나요?</div>
+        <p class="join-note">닉네임으로 접속하며 이름과 연락처는 입력하지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2>진행 과정</h2><p>신청부터 수업 준비와 운영, 수업 후 의견 공유까지 함께합니다.</p></div>
+    <ol class="steps">
+      <li><b>참여 신청</b><span class="when">모집 기간 중</span><p>신청서에 학교급, 교과, 해 보고 싶은 수업 방향을 적어 주세요.</p></li>
+      <li><b>참여 안내</b><span class="when">신청 후</span><p>수업 주제, 대상 학년, 일정을 함께 확인합니다.</p></li>
+      <li><b>수업 설계</b><span class="when">수업 전</span><p>수업 목표와 AI 활동, 학생 안내자료, 튜터 지침을 선생님과 맞춰 갑니다.</p></li>
+      <li><b>오리엔테이션과 수업 운영</b><span class="when">11월 중</span><p>접속과 기기를 점검하고 수업을 진행합니다.</p></li>
+      <li><b>수업 경험 공유 및 의견 나눔</b><span class="when">수업 후</span><p>수업 후 학생들의 활동과 수업 경험을 함께 돌아보고, 좋았던 점과 개선이 필요한 부분을 나눕니다.</p></li>
+    </ol>
+  </section>
+
+  <section class="section wrap">
+    <div class="notice">
+      <h3>선생님과 함께 AI 수업의 가능성을 찾아갑니다</h3>
+      <ul>
+        <li>학생들은 별도의 회원가입 없이 닉네임으로 AI 클래스에 참여해 AI와 대화하고, 아이디어를 발전시키며 다양한 활동을 경험할 수 있습니다.</li>
+        <li>학생들의 AI 활용 과정과 활동 결과물, 선생님의 수업 경험과 의견을 함께 살펴보며 AI가 수업에 어떤 도움을 줄 수 있을지, 더 나은 AI 수업을 위해 무엇이 필요한지 함께 찾아갑니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap" id="apply">
+    <div class="sec-head"><h2>참여 신청서</h2><p>신청서를 작성해 제출해 주세요.</p></div>
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between">
+      <div>
+        <h3>신청서 작성하기</h3>
+        <p class="muted">새 창에서 신청서가 열립니다. 1차 모집 기간은 10월 31일까지입니다.<br>연구 일정에 따라 조정될 수 있습니다.</p>
+      </div>
+      <a class="btn btn-sun" href="https://script.google.com/macros/s/AKfycbxxz7Eme-iqcPHZ2CdW7TB__Qi4S-qP8vYb5hjDdBrtfOy5Mj_7_llW2TJyIMv_d2Md8g/exec" target="_blank" rel="noopener">신청서 작성하기</a>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">테크빌교육 · 교육용 AI 세이프가드 현장 파일럿</div>
+</footer>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var store={
+    get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+    set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  };
+  function el(tag,cls,text){var n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n}
+
+  /* ---------- tabs ---------- */
+  var VIEWS=['recruit'];
+  function show(name){
+    if(VIEWS.indexOf(name)<0)name='recruit';
+    $$('.view').forEach(function(v){v.hidden=v.id!=='view-'+name});
+    $$('.tab').forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.tab===name))});
+        window.scrollTo(0,0);
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-tab]');
+    if(t){e.preventDefault();show(t.dataset.tab);return}
+    var g=e.target.closest('[data-goto]');
+    if(g){var n=document.getElementById(g.dataset.goto);if(n)n.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+  var h='';try{h=location.hash.slice(1)}catch(e){}
+  show(h);
+
+  })();
+</script>
+</body>
+</html>
